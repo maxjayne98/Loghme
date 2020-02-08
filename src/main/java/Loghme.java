@@ -32,7 +32,7 @@ public class Loghme {
                     getRestaurant(words[1]);
                     break;
                 case "addToCart":
-                    getRestaurant(words[1]);
+                    addToCard(words[1]);
                     break;
                 case "getFood":
                     getFood(words[1]);
@@ -44,16 +44,22 @@ public class Loghme {
         }
     }
 
+    private void addToCard(String jsonString) {
+        Restaurant selectedRestaurant = findRestaurant(jsonString,"restaurantName");
+        user.addToCart(jsonString,selectedRestaurant);
+    }
+
     private void getFood(String jsonString) {
         Gson gson = new Gson();
         JsonElement jsonElement = new JsonParser().parse(jsonString);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String restaurantName = jsonObject.get("restaurantName").getAsString();
+        Restaurant selectedRestaurant = findRestaurant(jsonString, "restaurantName");
         String selectedFoodName = jsonObject.get("foodName").getAsString();
         Food selectedFood;
 
         if (Restaurants.containsKey(restaurantName)) {
-            selectedFood = Restaurants.get(restaurantName).findFoodInMenu(selectedFoodName);
+            selectedFood = selectedRestaurant.findFoodInMenu(selectedFoodName);
         }
         else{
             System.out.println("your selected restaurant does not exist ...");
@@ -69,28 +75,25 @@ public class Loghme {
         }
 
     }
-
-    private void getRestaurant(String jsonString) {
+    private Restaurant findRestaurant(String jsonString,String selectedField){
         JsonElement jsonElement = new JsonParser().parse(jsonString);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
-        String selectedRestaurantName = jsonObject.get("name").getAsString();
-        Restaurant selectedRestaurant = Restaurants.get(selectedRestaurantName);
-
+        String selectedRestaurantName = jsonObject.get(selectedField).getAsString();
+        return Restaurants.get(selectedRestaurantName);
+    }
+    private void getRestaurant(String jsonString) {
         Gson gson = new Gson();
+        Restaurant selectedRestaurant = findRestaurant(jsonString, "name");
+
         String jsonnString = gson.toJson(selectedRestaurant);
         System.out.println(jsonnString);
 
     }
 
     private void addFood(String jsonString) {
-        JsonElement jsonElement = new JsonParser().parse(jsonString);
-        JsonObject jsonObject = jsonElement.getAsJsonObject();
-        String restaurantName = jsonObject.get("restaurantName").getAsString();
-        Restaurants.get(restaurantName).addFoodToMenu(jsonString);
-
-//        addFood {"name": "gheime", "description": "it’s yummy!", "popularity": 0.8,"restaurantName": "Hesturan", "price": 20000}
-
-
+        Restaurant selectedRestaurant = findRestaurant(jsonString, "restaurantName");
+        selectedRestaurant.addFoodToMenu(jsonString);
+        //        addFood {"name": "gheime", "description": "it’s yummy!", "popularity": 0.8,"restaurantName": "Hesturan", "price": 20000}
     }
 
     private void addRestaurant(String jsonString){
