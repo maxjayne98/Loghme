@@ -18,7 +18,7 @@ public class Loghme {
                     System.out.println("salam2");
                     break;
                 case "getRestraunts":
-                    showRestaurant();
+                    getRestraunts();
                     break;
                 default:
                     System.out.println("default");
@@ -36,7 +36,7 @@ public class Loghme {
     public HashMap<String, Restaurant> getRestaurants() {
         return Restaurants;
     }
-    public void showRestaurant(){
+    public void getRestraunts(){
         Set<String> keys = Restaurants.keySet();
         for(String key: keys){
             System.out.println(key);
