@@ -10,4 +10,8 @@ public class Food {
         this.popularity = popularity;
         this.price = price;
     }
+
+    public String getName() {
+        return name;
+    }
 }
