@@ -30,11 +30,20 @@ public class Restaurant {
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         String foodName = jsonObject.get("name").getAsString();
         String description = jsonObject.get("description").getAsString();
-        Integer price = jsonObject.get("description").getAsInt();
+        Integer price = jsonObject.get("price").getAsInt();
         float popularity = jsonObject.get("popularity").getAsFloat();
-        
+
         Food newFood = new Food(foodName,description,popularity,price);
         menu.add(newFood);
+    }
+
+    public Food findFoodInMenu(String foodName) {
+        for (int i = 0; i < menu.size() ; i++) {
+            if (menu.get(i).getName().equals(foodName)) {
+                return menu.get(i);
+            }
+        }
+        return null;
     }
 }
 //addRestaurant {"name": "Hesturan", "description": "luxury", "location": {"x": 1, "y": 3},"menu": [{"name": "Gheime", "description": "it’s yummy!", "popularity": 0.8, "price":20000}, {"name": "Kabab", "description": "it’s delicious!", "popularity": 0.6, "price":30000}]}
