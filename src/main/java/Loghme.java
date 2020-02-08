@@ -1,13 +1,16 @@
 import java.util.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Loghme {
     private HashMap<String, Restaurant> Restaurants = new HashMap<String, Restaurant>();
     static Scanner input = new Scanner(System.in);
+    GsonBuilder builder = new GsonBuilder();
 
     public void CommandHandler(){
 
         while (true) {
-            String myString = input.next();
+            String myString = input.nextLine();
             String[] words = myString.split(" ", 1);
 
             switch (words[0]){
