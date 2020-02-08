@@ -2,6 +2,10 @@ import java.util.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 public class Loghme {
     private HashMap<String, Restaurant> Restaurants = new HashMap<String, Restaurant>();
     static Scanner input = new Scanner(System.in);
@@ -18,7 +22,7 @@ public class Loghme {
                     addRestaurant(words[1]);
                     break;
                 case "addFood":
-                    System.out.println("salam2");
+                    addFood(words[1]);
                     break;
                 case "getRestaurants":
                     getRestraunts();
@@ -29,6 +33,19 @@ public class Loghme {
 
         }
     }
+
+    private void addFood(String jsonString) {
+        JsonElement jsonElement = new JsonParser().parse(jsonString);
+        JsonObject jsonObject = jsonElement.getAsJsonObject();
+        String restaurantName = jsonObject.get("restaurantName").getAsString();
+        Restaurants.get(restaurantName).addFoodToMenu(jsonString);
+        System.out.println(restaurantName);
+
+//        addFood {"name": "gheime", "description": "it’s yummy!", "popularity": 0.8,"restaurantName": "Hesturan", "price": 20000}
+
+
+    }
+
     private void addRestaurant(String jsonString){
         Gson gson = new Gson();
         System.out.println("your input :" + jsonString);
