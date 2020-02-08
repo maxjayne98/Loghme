@@ -1,47 +1,24 @@
+import java.util.*;
 public class Restaurant {
 
-    private String Name;
-    private String Description;
-    private Integer XLocation;
-    private Integer YLocation;
-
-
-    public Restaurant(String name, String description, Integer XLocation, Integer YLocation) {
-        this.Name = name;
-        this.Description = description;
-        this.XLocation = XLocation;
-        this.YLocation = YLocation;
-    }
+    private String name;
+    private String description;
+    private Location location;
+    private List<Food> menu;
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public Restaurant(String name, String description, Location location, List<Food> menu) {
+        this.name = name;
+        this.description = description;
+        this.location = location;
+        this.menu = menu;
     }
 
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String description) {
-        Description = description;
-    }
-
-    public Integer getXLocation() {
-        return XLocation;
-    }
-
-    public void setXLocation(Integer XLocation) {
-        this.XLocation = XLocation;
-    }
-
-    public Integer getYLocation() {
-        return YLocation;
-    }
-
-    public void setYLocation(Integer YLocation) {
-        this.YLocation = YLocation;
+    public List<Food> getMenu() {
+        return menu;
     }
 }
+//addRestaurant {"name": "Hesturan", "description": "luxury", "location": {"x": 1, "y": 3},"menu": [{"name": "Gheime", "description": "it’s yummy!", "popularity": 0.8, "price":20000}, {"name": "Kabab", "description": "it’s delicious!", "popularity": 0.6, "price":30000}]}
