@@ -1,3 +1,7 @@
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import java.util.List;
 
 public class Cart {
@@ -7,8 +11,9 @@ public class Cart {
     Cart(){
 
     }
-    public void addFood(){
-
+    public void addFood(Food selectedFood){
+        total += selectedFood.getPrice();
+        selectedFoods.add(selectedFood);
     }
     public List<Food> getSelectedFoods() {
         return selectedFoods;
@@ -18,7 +23,22 @@ public class Cart {
         return total;
     }
 
-    public void updateSum(Integer sum) {
-        this.total = sum;
+    public String getRestaurantName() {
+        return RestaurantName;
+    }
+
+    public void updateTotal(Integer total) {
+        this.total = total;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        RestaurantName = restaurantName;
+    }
+
+    public List<Food> getFoods() {
+        return selectedFoods;
+    }
+    public void emptyFoods(){
+        selectedFoods.clear();
     }
 }
