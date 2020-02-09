@@ -16,7 +16,7 @@ public class User {
             cart.addFood(selectedFood);
         }
         else{
-            System.out.println("your selected food can't add to your cart ...");
+            System.out.println("your selected food can't be added to your cart ...");
         }
     }
     public void getCart(){
