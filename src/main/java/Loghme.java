@@ -1,9 +1,7 @@
-import java.lang.reflect.Array;
 import java.util.*;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import java.lang.Math;
-import javafx.util.Pair;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -30,7 +28,7 @@ public class Loghme {
                     addFood(words[1]);
                     break;
                 case "getRestaurants":
-                    getRestraunts();
+                    getRestaurants();
                     break;
                 case "getRestaurant":
                     getRestaurant(words[1]);
@@ -56,15 +54,14 @@ public class Loghme {
 
         }
     }
-    public static <T> List<T> convertSetToList(Set<T> set)
-    {
+    public static <T> List<T> convertSetToList(Set<T> set) {
         List<T> list = new ArrayList<>();
 
         list.addAll(set);
 
         return list;
     }
-    private void getRecommendedRestaurants(){
+    public void getRecommendedRestaurants(){
         HashMap<Double, String> tempRestaurant = new HashMap<Double, String>();
         for (Restaurant restaurant : Restaurants.values()) {
             double popularityAvg = restaurant.findFoodsPopulationAvg();
@@ -81,15 +78,15 @@ public class Loghme {
 
     }
 
-    private void finalizeOrder() {
+    public void finalizeOrder() {
         user.finalizeOrder();
     }
 
-    private void getCart() {
+    public void getCart() {
         user.getCart();
     }
 
-    private void addToCard(String jsonString) {
+    public void addToCard(String jsonString) {
         Restaurant selectedRestaurant = findRestaurant(jsonString,"restaurantName");
         String selectedFoodName = findFieldInJsonString(jsonString, "foodName");
         Food selectedFood = selectedRestaurant.findFoodInMenu(selectedFoodName);
@@ -101,7 +98,7 @@ public class Loghme {
         }
     }
 
-    private void getFood(String jsonString) {
+    public void getFood(String jsonString) {
         Gson gson = new Gson();
         Restaurant selectedRestaurant = findRestaurant(jsonString, "restaurantName");
         String selectedFoodName = findFieldInJsonString(jsonString, "foodName");
@@ -123,7 +120,7 @@ public class Loghme {
         }
 
     }
-    private String findFieldInJsonString(String jsonString,String selectedField){
+    public String findFieldInJsonString(String jsonString,String selectedField){
         JsonElement jsonElement = new JsonParser().parse(jsonString);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
         if (jsonObject.get(selectedField) != null){
@@ -134,7 +131,7 @@ public class Loghme {
             return null;
         }
     }
-    private Restaurant findRestaurant(String jsonString,String selectedField){
+    public Restaurant findRestaurant(String jsonString,String selectedField){
         String selectedRestaurantName = findFieldInJsonString(jsonString,selectedField);
         if (selectedRestaurantName.equals(null)) {
             return null;
@@ -145,7 +142,7 @@ public class Loghme {
             return null;
         }
     }
-    private void getRestaurant(String jsonString) {
+    public void getRestaurant(String jsonString) {
         Gson gson = new Gson();
         Restaurant selectedRestaurant = findRestaurant(jsonString, "name");
 
@@ -154,26 +151,18 @@ public class Loghme {
 
     }
 
-    private void addFood(String jsonString) {
+    public void addFood(String jsonString) {
         Restaurant selectedRestaurant = findRestaurant(jsonString, "restaurantName");
         selectedRestaurant.addFoodToMenu(jsonString);
-        //        addFood {"name": "gheime", "description": "it’s yummy!", "popularity": 0.8,"restaurantName": "Hesturan", "price": 20000}
     }
 
-    private void addRestaurant(String jsonString){
+    public void addRestaurant(String jsonString){
         Gson gson = new Gson();
         Restaurant newRestaurant = gson.fromJson(jsonString, Restaurant.class);
-        //for input testing
-        String jsonnString = gson.toJson(newRestaurant);
-        System.out.println(jsonnString);
-
         Restaurants.put(newRestaurant.getName(),newRestaurant);
+    }
 
-    }
-    public HashMap<String, Restaurant> getRestaurants() {
-        return Restaurants;
-    }
-    public void getRestraunts(){
+    public void getRestaurants(){
         Set<String> keys = Restaurants.keySet();
         for(String key: keys){
             System.out.println(key);
