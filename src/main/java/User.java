@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -27,9 +28,17 @@ public class User {
 
     }
 
-    public void finalizeOrder() {
+    public String finalizeOrder() {
+        Gson gson = new Gson();
+        String jsonString = gson.toJson(this.cart);
+        JsonObject convertedObject = new Gson().fromJson(jsonString, JsonObject.class);
+        convertedObject.remove("RestaurantName");
+        jsonString = gson.toJson(convertedObject);
+        System.out.println(jsonString);
+        System.out.println("Your Order has finalized!!");
         cart.setRestaurantName(null);
-        cart.updateTotal(0);
+        cart.updateCount(0);
         cart.emptyFoods();
+        return jsonString;
     }
 }

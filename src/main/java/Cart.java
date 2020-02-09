@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
-    private Integer total;
+    private Integer count;
     private String RestaurantName;
     private List<Food> selectedFoods = new ArrayList<Food>();
     Cart(){
-        total = 0;
+        count = 0;
         RestaurantName = null;
     }
     public void addFood(Food selectedFood){
-        total += selectedFood.getPrice();
+        count += 1;
         selectedFoods.add(selectedFood);
     }
     public List<Food> getSelectedFoods() {
@@ -22,15 +22,15 @@ public class Cart {
     }
 
     public Integer getSum() {
-        return total;
+        return count;
     }
 
     public String getRestaurantName() {
         return RestaurantName;
     }
 
-    public void updateTotal(Integer total) {
-        this.total = total;
+    public void updateCount(Integer count) {
+        this.count = count;
     }
 
     public void setRestaurantName(String restaurantName) {
