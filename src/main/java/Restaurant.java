@@ -37,6 +37,15 @@ public class Restaurant {
         menu.add(newFood);
     }
 
+    public double findFoodsPopulationAvg(){
+        double sum = 0.0;
+        for (int i = 0; i < menu.size() ; i++) {
+            sum += menu.get(i).getPopularity();
+        }
+        return sum/menu.size();
+
+    }
+
     public Food findFoodInMenu(String foodName) {
         for (int i = 0; i < menu.size() ; i++) {
             if (menu.get(i).getName().equals(foodName)) {
@@ -44,6 +53,12 @@ public class Restaurant {
             }
         }
         return null;
+    }
+    public Integer getXLocation(){
+        return location.getXLocation();
+    }
+    public Integer getYLocation(){
+        return location.getYLocation();
     }
 }
 //addRestaurant {"name": "Hesturan", "description": "luxury", "location": {"x": 1, "y": 3},"menu": [{"name": "Gheime", "description": "it’s yummy!", "popularity": 0.8, "price":20000}, {"name": "Kabab", "description": "it’s delicious!", "popularity": 0.6, "price":30000}]}
