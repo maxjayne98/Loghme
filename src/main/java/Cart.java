@@ -20,7 +20,6 @@ public class Cart {
     public List<Food> getSelectedFoods() {
         return selectedFoods;
     }
-
     public Integer getSum() {
         return count;
     }
@@ -40,7 +39,11 @@ public class Cart {
     public List<Food> getFoods() {
         return selectedFoods;
     }
+
     public void emptyFoods(){
         selectedFoods.clear();
+    }
+    public Integer getCount() {
+        return count;
     }
 }

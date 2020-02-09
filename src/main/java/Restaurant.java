@@ -15,6 +15,7 @@ public class Restaurant {
     }
 
     public Restaurant(String name, String description, Location location, List<Food> menu) {
+        this.menu = new ArrayList<Food>();
         this.name = name;
         this.description = description;
         this.location = location;

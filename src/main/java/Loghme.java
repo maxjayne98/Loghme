@@ -78,12 +78,12 @@ public class Loghme {
 
     }
 
-    public void finalizeOrder() {
-        user.finalizeOrder();
+    public String finalizeOrder() {
+        return user.finalizeOrder();
     }
 
-    public void getCart() {
-        user.getCart();
+    public List<Food> getCart() {
+        return user.getCart();
     }
 
     public void addToCard(String jsonString) {
@@ -133,7 +133,7 @@ public class Loghme {
     }
     public Restaurant findRestaurant(String jsonString,String selectedField){
         String selectedRestaurantName = findFieldInJsonString(jsonString,selectedField);
-        if (selectedRestaurantName.equals(null)) {
+        if (selectedRestaurantName == null) {
             return null;
         } else if (Restaurants.containsKey(selectedRestaurantName)) {
             return Restaurants.get(selectedRestaurantName);

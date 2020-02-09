@@ -1,4 +1,9 @@
+import com.google.gson.Gson;
 import org.junit.*;
+
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.Assert.*;
 
 public class Test {
@@ -6,11 +11,11 @@ public class Test {
 
     @Before
     public void setup(){
-        String ResInf1 = "addRestaurant {\"name\": \"PedareKhoob\", \"description\": \"Pedar Is Good!\", \"location\": {\"x\": 1, \"y\": 3}}";
-        String ResInf2 = "addRestaurant {\"name\": \"YoohanJayoo\", \"description\": \"Corona Virus!\", \"location\": {\"x\": 4, \"y\": 4}}";
-        String ResInf3 = "addRestaurant {\"name\": \"ChipsFoorooshi\", \"description\": \"We Sell Chips\", \"location\": {\"x\": 2, \"y\": 6}}";
-        String ResInf4 = "addRestaurant {\"name\": \"MastKhori\", \"description\": \"We Eat Yogurt!\", \"location\": {\"x\": 6, \"y\": 4}}";
-        String ResInf5 = "addRestaurant {\"name\": \"Ash\", \"description\": \"Ash Halim\", \"location\": {\"x\": 3, \"y\": 5}}";
+        String ResInf1 = "{\"name\": \"PedareKhoob\", \"description\": \"Pedar Is Good!\", \"location\": {\"x\": 1, \"y\": 3}, \"menu\": [{\"name\": \"Soop\", \"description\": \"it’s not Food!\", \"popularity\": 0.2, \"price\":6000}]}";
+        String ResInf2 = "{\"name\": \"YoohanJayoo\", \"description\": \"Corona Virus!\", \"location\": {\"x\": 4, \"y\": 4}, \"menu\": [{\"name\": \"Ghorme\", \"description\": \"Sabzi!\", \"popularity\": 0.2, \"price\":12000}]}";
+        String ResInf3 = "{\"name\": \"ChipsFoorooshi\", \"description\": \"We Sell Chips\", \"location\": {\"x\": 2, \"y\": 6}, \"menu\": [{\"name\": \"Makarani\", \"description\": \"like pasta!\", \"popularity\": 0.2, \"price\":10000}]}";
+        String ResInf4 = "{\"name\": \"MastKhori\", \"description\": \"We Eat Yogurt!\", \"location\": {\"x\": 6, \"y\": 4}, \"menu\": [{\"name\": \"Kabab\", \"description\": \"Vah Vah!\", \"popularity\": 0.2, \"price\":20000}]}";
+        String ResInf5 = "{\"name\": \"Ash\", \"description\": \"Ash Halim\", \"location\": {\"x\": 3, \"y\": 5}, \"menu\": [{\"name\": \"ZereshkPolo\", \"description\": \"Zereshk!\", \"popularity\": 0.2, \"price\":8000}]}";
 
         loghme.addRestaurant(ResInf1);
         loghme.addRestaurant(ResInf2);
@@ -48,6 +53,29 @@ public class Test {
         loghme.addToCard(FoodToOrder2);
         loghme.addToCard(FoodToOrder3);
 
-        loghme.finalizeOrder();
+        List<Food> menu = loghme.getCart();
+        assertFalse(menu.isEmpty());
+        String printedOrder = loghme.finalizeOrder();
+        assertTrue(menu.isEmpty());
+//        String ExpectedOutput = "{\"Foodnames\":[\"falafel\",\"kotlet\",\"bademjoon\"],\"count\":3}";
+//        assertSame(ExpectedOutput, printedOrder);
     }
+
+//    @org.junit.Test
+//    public void TestRecommended(){
+//        String FoodToOrder1 = "{\"foodName\": \"falafel\", \"restaurantName\": \"YoohanJayoo\"}";
+//        String FoodToOrder2 = "{\"foodName\": \"kotlet\", \"restaurantName\": \"YoohanJayoo\"}";
+//        String FoodToOrder3 = "{\"foodName\": \"bademjoon\", \"restaurantName\": \"YoohanJayoo\"}";
+//
+//        loghme.addToCard(FoodToOrder1);
+//        loghme.addToCard(FoodToOrder2);
+//        loghme.addToCard(FoodToOrder3);
+//
+//        List<Food> menu = loghme.getCart();
+//        assertFalse(menu.isEmpty());
+//        String printedOrder = loghme.finalizeOrder();
+//        assertTrue(menu.isEmpty());
+//        String ExpectedOutput = "{\"Foodnames\":[\"flafel\", \"kotlet\", \"bademjoon\"],\"count\":3}";
+//        assertSame(ExpectedOutput, printedOrder);
+//    }
 }
