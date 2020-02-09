@@ -11,6 +11,6 @@ public class Location {
         return this.x ;
     }
     public Integer getYLocation(){
-        return this.x ;
+        return this.y ;
     }
 }
