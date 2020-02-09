@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,11 +57,21 @@ public class Loghme {
         }
     }
     private void getRecommendedRestaurants(){
-
+        HashMap<Double, String> tempRestaurant = new HashMap<Double, String>();
         for (Restaurant restaurant : Restaurants.values()) {
             double popularityAvg = restaurant.findFoodsPopulationAvg();
             double distance = Math.sqrt(Math.pow(restaurant.getXLocation(),2) + Math.pow(restaurant.getYLocation(),2));
+            tempRestaurant.put(distance * popularityAvg, restaurant.getName());
         }
+        TreeMap<Double, String> sortedRestaurantTree = new TreeMap<>(tempRestaurant);
+//        Set<Map.Entry<Double, String>> mappings = sortedRestaurantTree.entrySet();
+        Collection<String> sortedRestaurantCollection = sortedRestaurantTree.values();
+        Iterator iter = sortedRestaurantCollection.iterator();
+        for (int i = 0; i < 3; i++) {
+            System.out.println(iter.);
+        }
+
+
     }
 
     private void finalizeOrder() {
