@@ -11,7 +11,15 @@ public class Food {
         this.price = price;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public float getPopularity() {
+        return popularity;
     }
 }
