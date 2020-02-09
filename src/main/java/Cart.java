@@ -2,14 +2,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Cart {
     private Integer total;
     private String RestaurantName;
-    private List<Food> selectedFoods;
+    private List<Food> selectedFoods = new ArrayList<Food>();
     Cart(){
-
+        total = 0;
+        RestaurantName = null;
     }
     public void addFood(Food selectedFood){
         total += selectedFood.getPrice();
