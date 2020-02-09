@@ -1,10 +1,13 @@
 import java.util.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import java.lang.Math;
+import javafx.util.Pair;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
 
 public class Loghme {
     private HashMap<String, Restaurant> Restaurants = new HashMap<String, Restaurant>();
@@ -34,6 +37,15 @@ public class Loghme {
                 case "addToCart":
                     addToCard(words[1]);
                     break;
+                case "getCart":
+                    getCart();
+                    break;
+                case "finalizeOrder":
+                    finalizeOrder();
+                    break;
+                case "getRecommendedRestaurants":
+                    getRecommendedRestaurants();
+                    break;
                 case "getFood":
                     getFood(words[1]);
                     break;
@@ -43,26 +55,44 @@ public class Loghme {
 
         }
     }
+    private void getRecommendedRestaurants(){
+
+        for (Restaurant restaurant : Restaurants.values()) {
+            double popularityAvg = restaurant.findFoodsPopulationAvg();
+            double distance = Math.sqrt(Math.pow(restaurant.getXLocation(),2) + Math.pow(restaurant.getYLocation(),2));
+        }
+    }
+
+    private void finalizeOrder() {
+        user.finalizeOrder();
+    }
+
+    private void getCart() {
+        user.getCart();
+    }
 
     private void addToCard(String jsonString) {
         Restaurant selectedRestaurant = findRestaurant(jsonString,"restaurantName");
-        user.addToCart(jsonString,selectedRestaurant);
+        String selectedFoodName = findFieldInJsonString(jsonString, "foodName");
+        Food selectedFood = selectedRestaurant.findFoodInMenu(selectedFoodName);
+        if (selectedFood != null){
+            user.addToCart(jsonString,selectedRestaurant,selectedFood);
+        }
+        else {
+            System.out.println("your selected Restaurant does not have this food ...");
+        }
     }
 
     private void getFood(String jsonString) {
         Gson gson = new Gson();
-        JsonElement jsonElement = new JsonParser().parse(jsonString);
-        JsonObject jsonObject = jsonElement.getAsJsonObject();
-        String restaurantName = jsonObject.get("restaurantName").getAsString();
         Restaurant selectedRestaurant = findRestaurant(jsonString, "restaurantName");
-        String selectedFoodName = jsonObject.get("foodName").getAsString();
+        String selectedFoodName = findFieldInJsonString(jsonString, "foodName");
         Food selectedFood;
 
-        if (Restaurants.containsKey(restaurantName)) {
+        if (selectedRestaurant != null) {
             selectedFood = selectedRestaurant.findFoodInMenu(selectedFoodName);
         }
         else{
-            System.out.println("your selected restaurant does not exist ...");
             return ;
         }
 
@@ -75,11 +105,27 @@ public class Loghme {
         }
 
     }
-    private Restaurant findRestaurant(String jsonString,String selectedField){
+    private String findFieldInJsonString(String jsonString,String selectedField){
         JsonElement jsonElement = new JsonParser().parse(jsonString);
         JsonObject jsonObject = jsonElement.getAsJsonObject();
-        String selectedRestaurantName = jsonObject.get(selectedField).getAsString();
-        return Restaurants.get(selectedRestaurantName);
+        if (jsonObject.get(selectedField) != null){
+            return jsonObject.get(selectedField).getAsString();
+        }
+        else {
+            System.out.println(selectedField + "was not in : " + jsonString);
+            return null;
+        }
+    }
+    private Restaurant findRestaurant(String jsonString,String selectedField){
+        String selectedRestaurantName = findFieldInJsonString(jsonString,selectedField);
+        if (selectedRestaurantName.equals(null)) {
+            return null;
+        } else if (Restaurants.containsKey(selectedRestaurantName)) {
+            return Restaurants.get(selectedRestaurantName);
+        } else {
+            System.out.println("your selected restaurant does not exist ...");
+            return null;
+        }
     }
     private void getRestaurant(String jsonString) {
         Gson gson = new Gson();
