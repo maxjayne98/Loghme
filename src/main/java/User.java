@@ -30,5 +30,6 @@ public class User {
     public void finalizeOrder() {
         cart.setRestaurantName(null);
         cart.updateTotal(0);
+        cart.emptyFoods();
     }
 }
