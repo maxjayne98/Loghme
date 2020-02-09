@@ -60,8 +60,7 @@ public class Loghme {
     {
         List<T> list = new ArrayList<>();
 
-        for (T t : set)
-            list.add(t);
+        list.addAll(set);
 
         return list;
     }
