@@ -60,22 +60,4 @@ public class Test {
 //        String ExpectedOutput = "{\"Foodnames\":[\"falafel\",\"kotlet\",\"bademjoon\"],\"count\":3}";
 //        assertSame(ExpectedOutput, printedOrder);
     }
-
-//    @org.junit.Test
-//    public void TestRecommended(){
-//        String FoodToOrder1 = "{\"foodName\": \"falafel\", \"restaurantName\": \"YoohanJayoo\"}";
-//        String FoodToOrder2 = "{\"foodName\": \"kotlet\", \"restaurantName\": \"YoohanJayoo\"}";
-//        String FoodToOrder3 = "{\"foodName\": \"bademjoon\", \"restaurantName\": \"YoohanJayoo\"}";
-//
-//        loghme.addToCard(FoodToOrder1);
-//        loghme.addToCard(FoodToOrder2);
-//        loghme.addToCard(FoodToOrder3);
-//
-//        List<Food> menu = loghme.getCart();
-//        assertFalse(menu.isEmpty());
-//        String printedOrder = loghme.finalizeOrder();
-//        assertTrue(menu.isEmpty());
-//        String ExpectedOutput = "{\"Foodnames\":[\"flafel\", \"kotlet\", \"bademjoon\"],\"count\":3}";
-//        assertSame(ExpectedOutput, printedOrder);
-//    }
 }
