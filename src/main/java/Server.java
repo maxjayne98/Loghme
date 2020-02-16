@@ -180,8 +180,37 @@ public class Server{
             public void handle(@NotNull Context context) throws Exception {
                 User user = loghme.getUser();
                 String userNewCredit = context.formParam("credit");
+                if (userNewCredit == null) {
+                    return;//this not work fix it
+                }
                 user.setCredit(user.getCredit() + Integer.parseInt(userNewCredit));
-                System.out.println(user.getCredit());
+                String finalHtml = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>User</title>\n" +
+                        "    <style>\n" +
+                        "        li {\n" +
+                        "        \tpadding: 5px\n" +
+                        "        }\n" +
+                        "    </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "    <ul>\n" +
+                        "        <li>id: " + user.getId()+ "</li>\n" +
+                        "        <li>full name:" + user.getFullName() + "</li>\n" +
+                        "        <li>phone number: " + user.getPhoneNumber() + "</li>\n" +
+                        "        <li>email: " + user.getEmail() + "</li>\n" +
+                        "        <li>credit: " + user.getCredit() + " Toman</li>\n" +
+                        "        <form action=\"\" method=\"POST\">\n" +
+                        "            <button type=\"submit\">increase</button>\n" +
+                        "            <input type=\"text\" name=\"credit\" value=\"\" />\n" +
+                        "        </form>\n" +
+                        "    </ul>\n" +
+                        "</body>\n" +
+                        "</html>";
+                context.html(finalHtml);
+
             }
         });
 
