@@ -3,6 +3,9 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Set;
+
 
 public class Server{
 
@@ -12,22 +15,61 @@ public class Server{
         app.get("/getRestaurants", new Handler() {
             @Override
             public void handle(@NotNull Context context) throws Exception {
-                String row = "<tr>\n" +
-                        "            <td>1</td>\n" +
-                        "            <td><img class=\"logo\" src=\"https://picsum.photos/536/354\" alt=\"logo\"></td>\n" +
-                        "            <td>restaurant 1 name</td>\n" +
-                        "            <td>luxury</td>\n" +
-                        "        </tr>";
-                String Table = "<table>\n" +
+
+                HashMap<String, Restaurant> restaurants = loghme.getRestaurants();
+                Set<String> keys = restaurants.keySet();
+                User user = loghme.getUser();
+                Location userLocation = user.getLocation();
+                String result = " ";
+                for (String key: keys) {
+                    Restaurant restaurant = restaurants.get(key);
+                    Double distance = Math.sqrt(Math.pow(userLocation.getXLocation() - restaurant.getXLocation(),2)+Math.pow(userLocation.getYLocation() - restaurant.getYLocation(),2));
+                    if (distance <= 170){
+                        continue;
+                    }
+                    String row = "<tr>\n" +
+                            "            <td>"+ restaurant.getId() +"</td>\n" +
+                            "            <td><img class=\"logo\" src=" + restaurant.getLogo() + " alt=\"logo\"></td>\n" +
+                            "            <td>" + restaurant.getName() + "</td>\n" +
+                            "        </tr>";
+                    result = result + row;
+                }
+
+                String finalHtml = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>Restaurants</title>\n" +
+                        "    <style>\n" +
+                        "        table {\n" +
+                        "            text-align: center;\n" +
+                        "            margin: auto;\n" +
+                        "            border: 1px solid black;\n" +
+                        "        }\n" +
+                        "        th, td {\n" +
+                        "            padding: 5px;\n" +
+                        "            text-align: center;\n" +
+                        "            border: 1px solid black;\n" +
+                        "        }\n" +
+                        "        .logo{\n" +
+                        "            width: 100px;\n" +
+                        "            height: 100px;\n" +
+                        "        }\n" +
+                        "    </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "    <table>\n" +
                         "        <tr>\n" +
                         "            <th>id</th>\n" +
                         "            <th>logo</th>\n" +
                         "            <th>name</th>\n" +
-                        "            <th>description</th>\n" +
-                        "        </tr>\n" +
-                        "    </table>";
+                        "        </tr> \n" + result +
+                        "    </table>\n" +
+                        "</body>\n" +
+                        "</html>";
+                context.html(finalHtml);
             }
-        })
+        });
     }
 
 
