@@ -1,14 +1,18 @@
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+
 public class Food {
     private String name;
     private String description;
-    private float popularity;
     private Integer price;
+    private float popularity;
+    private String image;
 
-    public Food(String name, String description, float popularity, Integer price) {
+    public Food(String name, String description, float popularity, Integer price, String image) {
         this.name = name;
         this.description = description;
-        this.popularity = popularity;
         this.price = price;
+        this.popularity = popularity;
+        this.image = image;
     }
 
     public String getName() {

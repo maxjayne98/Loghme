@@ -5,25 +5,31 @@ import com.google.gson.JsonParser;
 import java.util.*;
 public class Restaurant {
 
+    private String id;
     private String name;
-    private String description;
     private Location location;
+    private String logo;
     private List<Food> menu;
 
     public String getName() {
         return name;
     }
 
-    public Restaurant(String name, String description, Location location, List<Food> menu) {
+    public Restaurant(String id, String name, Location location, String logo, List<Food> menu) {
         this.menu = new ArrayList<Food>();
+        this.id = id;
         this.name = name;
-        this.description = description;
         this.location = location;
+        this.logo = logo;
         this.menu = menu;
     }
 
     public List<Food> getMenu() {
         return menu;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void addFoodToMenu(String jsonString) {
@@ -33,8 +39,8 @@ public class Restaurant {
         String description = jsonObject.get("description").getAsString();
         Integer price = jsonObject.get("price").getAsInt();
         float popularity = jsonObject.get("popularity").getAsFloat();
-
-        Food newFood = new Food(foodName,description,popularity,price);
+        String image = jsonObject.get("image").getAsString();
+        Food newFood = new Food(foodName,description,popularity,price, image);
         menu.add(newFood);
     }
 
@@ -62,4 +68,3 @@ public class Restaurant {
         return location.getYLocation();
     }
 }
-//addRestaurant {"name": "Hesturan", "description": "luxury", "location": {"x": 1, "y": 3},"menu": [{"name": "Gheime", "description": "it’s yummy!", "popularity": 0.8, "price":20000}, {"name": "Kabab", "description": "it’s delicious!", "popularity": 0.6, "price":30000}]}
