@@ -19,6 +19,14 @@ public class Food {
         return name;
     }
 
+    public Integer getPrice() {
+        return price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
     public float getPopularity() {
         return popularity;
     }
