@@ -11,9 +11,9 @@ public class User {
     String fullName;
     String phoneNumber;
     String email;
-    String credit;
+    Integer credit;
 
-    public User(String id, String fullName, String phoneNumber, String email, String credit) {
+    public User(String id, String fullName, String phoneNumber, String email, Integer credit) {
         this.id = id;
         this.fullName = fullName;
         this.phoneNumber = phoneNumber;
@@ -37,11 +37,11 @@ public class User {
         return email;
     }
 
-    public String getCredit() {
+    public Integer getCredit() {
         return credit;
     }
 
-    public void setCredit(String credit) {
+    public void setCredit(Integer credit) {
         this.credit = credit;
     }
 
