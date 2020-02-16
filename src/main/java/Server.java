@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class Server{
 
-    public static void createServer(Loghme loghme){
+    public static void createServer(final Loghme loghme){
         Javalin app = Javalin.create().start(8080);
         app.get("/", ctx -> ctx.html("<h1>Welcome to Loghmeh</h1>"));
         app.get("/getRestaurants", new Handler() {
@@ -164,7 +164,7 @@ public class Server{
                         "        <li>full name:" + user.getFullName() + "</li>\n" +
                         "        <li>phone number: " + user.getPhoneNumber() + "</li>\n" +
                         "        <li>email: " + user.getEmail() + "</li>\n" +
-                        "        <li>credit: " + user.getCredit() + "</li>\n" +
+                        "        <li>credit: " + user.getCredit() + " Toman</li>\n" +
                         "        <form action=\"\" method=\"POST\">\n" +
                         "            <button type=\"submit\">increase</button>\n" +
                         "            <input type=\"text\" name=\"credit\" value=\"\" />\n" +
@@ -173,6 +173,15 @@ public class Server{
                         "</body>\n" +
                         "</html>";
                 context.html(finalHtml);
+            }
+        });
+        app.post("user", new Handler() {
+            @Override
+            public void handle(@NotNull Context context) throws Exception {
+                User user = loghme.getUser();
+                String userNewCredit = context.formParam("credit");
+                user.setCredit(user.getCredit() + Integer.parseInt(userNewCredit));
+                System.out.println(user.getCredit());
             }
         });
 
