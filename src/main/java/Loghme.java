@@ -162,6 +162,10 @@ public class Loghme {
         Restaurants.put(newRestaurant.getName(),newRestaurant);
     }
 
+    public void addRestaurant(Restaurant ToAddRestaurant){
+            this.Restaurants.put(ToAddRestaurant.getName(),ToAddRestaurant);
+        }
+
     public void getRestaurants(){
         Set<String> keys = Restaurants.keySet();
         for(String key: keys){

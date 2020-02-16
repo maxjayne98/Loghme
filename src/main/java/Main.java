@@ -12,6 +12,10 @@ public class Main {
         Restaurant[] Restaurants = gson.fromJson(RestaurantsList, Restaurant[].class);
         System.out.println(Restaurants.length);
         Loghme loghme = new Loghme();
+        for (Restaurant restaurant: Restaurants){
+            loghme.addRestaurant(restaurant);
+        }
+        loghme.getRestaurants();
         loghme.CommandHandler();
     }
 
