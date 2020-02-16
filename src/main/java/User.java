@@ -6,9 +6,15 @@ import java.util.List;
 
 public class User {
     Cart cart = new Cart();
+    Location location = new Location(0,0);
     User(){
 
     }
+
+    public Location getLocation() {
+        return location;
+    }
+
     public void addToCart(String jsonString, Restaurant selectedRestaurant, Food selectedFood){
         if (cart.getRestaurantName() == null){
             cart.setRestaurantName(selectedRestaurant.getName());
