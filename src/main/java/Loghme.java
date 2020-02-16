@@ -142,13 +142,14 @@ public class Loghme {
             return null;
         }
     }
-    public void getRestaurant(String jsonString) {
-        Gson gson = new Gson();
-        Restaurant selectedRestaurant = findRestaurant(jsonString, "name");
-
-        String jsonnString = gson.toJson(selectedRestaurant);
-        System.out.println(jsonnString);
-
+    public Restaurant getRestaurant(String RestaurantId) {
+        for (Map.Entry<String,Restaurant> entry: Restaurants.entrySet()){
+            Restaurant restaurant = entry.getValue();
+            if(restaurant.getId().equals(RestaurantId)){
+                return restaurant;
+            }
+        }
+        return null;
     }
 
     public void addFood(String jsonString) {
