@@ -7,8 +7,42 @@ import java.util.List;
 public class User {
     Cart cart = new Cart();
     Location location = new Location(0,0);
-    User(){
+    String id;
+    String fullName;
+    String phoneNumber;
+    String email;
+    String credit;
 
+    public User(String id, String fullName, String phoneNumber, String email, String credit) {
+        this.id = id;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.credit = credit;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getCredit() {
+        return credit;
+    }
+
+    public void setCredit(String credit) {
+        this.credit = credit;
     }
 
     public Location getLocation() {
