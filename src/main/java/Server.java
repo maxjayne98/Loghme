@@ -3,7 +3,9 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Set;
 
 
@@ -24,7 +26,7 @@ public class Server{
                 for (String key: keys) {
                     Restaurant restaurant = restaurants.get(key);
                     Double distance = Math.sqrt(Math.pow(userLocation.getXLocation() - restaurant.getXLocation(),2)+Math.pow(userLocation.getYLocation() - restaurant.getYLocation(),2));
-                    if (distance <= 170){
+                    if (distance >= 170){
                         continue;
                     }
                     String row = "<tr>\n" +
@@ -70,6 +72,79 @@ public class Server{
                 context.html(finalHtml);
             }
         });
+        app.get("getRestaurant/.*?", new Handler() {
+            @Override
+            public void handle(@NotNull Context context) throws Exception {
+                String restaurantId = context.path().replace("/getRestaurant/", "");
+                User user = loghme.getUser();
+                Location userLocation = user.getLocation();
+                Restaurant restaurant = loghme.getRestaurant(restaurantId);
+                Double distance = Math.sqrt(Math.pow(userLocation.getXLocation() - restaurant.getXLocation(),2)+Math.pow(userLocation.getYLocation() - restaurant.getYLocation(),2));
+                if (restaurant != null){
+                    if (distance <= 170){
+                        List<Food> restaurantFoods;
+                        restaurantFoods = restaurant.getMenu();
+                        String menu = " ";
+                        for (Food food : restaurantFoods){
+                            String row = "<li>\n" +
+                                    "                    <img src=" + food.getImage() + " alt=\"logo\">\n" +
+                                    "                    <div>" + food.getName()+ "</div>\n" +
+                                    "                    <div>" + food.getPrice().toString() + "</div>\n" +
+                                    "                    <form action=\"\" method=\"POST\">\n" +
+                                    "                        <button type=\"submit\">addToCart</button>\n" +
+                                    "                    </form>\n" +
+                                    "                </li>";
+                            menu = menu + row;
+                        }
+                        String finalHtml = "<!DOCTYPE html>\n" +
+                                "<html lang=\"en\">\n" +
+                                "<head>\n" +
+                                "    <meta charset=\"UTF-8\">\n" +
+                                "    <title>Restaurant</title>\n" +
+                                "    <style>\n" +
+                                "        img {\n" +
+                                "        \twidth: 50px;\n" +
+                                "        \theight: 50px;\n" +
+                                "        }\n" +
+                                "        li {\n" +
+                                "            display: flex;\n" +
+                                "            flex-direction: row;\n" +
+                                "        \tpadding: 0 0 5px;\n" +
+                                "        }\n" +
+                                "        div, form {\n" +
+                                "            padding: 0 5px\n" +
+                                "        }\n" +
+                                "    </style>\n" +
+                                "</head>\n" +
+                                "<body>\n" +
+                                "    <ul>\n" +
+                                "        <li>id: " + restaurant.getId() + "</li>\n" +
+                                "        <li>name: " + restaurant.getName() +"</li>\n" +
+                                "        <li>location: (" + restaurant.getXLocation() + ", " +restaurant.getYLocation() + ")</li>\n" +
+                                "        <li>logo: <img src=" + restaurant.getLogo() +" alt=\"logo\"></li>\n" +
+                                "        <li>menu: \n" +
+                                "        \t<ul>\n" +
+                                          menu          +
+                                "        \t</ul>\n" +
+                                "        </li>\n" +
+                                "    </ul>\n" +
+                                "</body>\n" +
+                                "</html>";
+                        context.html(finalHtml);
+
+                    }
+                    else{
+                        context.status(403);
+                    }
+                }
+                else{
+                    context.status(404);
+                }
+
+            }
+        });
+        
+
     }
 
 
