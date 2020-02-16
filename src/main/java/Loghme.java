@@ -166,11 +166,11 @@ public class Loghme {
             this.Restaurants.put(ToAddRestaurant.getName(),ToAddRestaurant);
         }
 
-    public void getRestaurants(){
-        Set<String> keys = Restaurants.keySet();
-        for(String key: keys){
-            System.out.println(key);
-        }
+    public HashMap<String, Restaurant> getRestaurants(){
+        return Restaurants;
     }
 
+    public User getUser() {
+        return user;
+    }
 }
