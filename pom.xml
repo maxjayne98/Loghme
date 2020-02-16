@@ -42,6 +42,11 @@
             <version>4.13</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>io.javalin</groupId>
+            <artifactId>javalin</artifactId>
+            <version>3.7.0</version>
+        </dependency>
     </dependencies>
 
 
