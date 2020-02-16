@@ -143,7 +143,38 @@ public class Server{
 
             }
         });
-        
+        app.get("user", new Handler() {
+            @Override
+            public void handle(@NotNull Context context) throws Exception {
+                User user = loghme.getUser();
+                String finalHtml = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>User</title>\n" +
+                        "    <style>\n" +
+                        "        li {\n" +
+                        "        \tpadding: 5px\n" +
+                        "        }\n" +
+                        "    </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "    <ul>\n" +
+                        "        <li>id: " + user.getId()+ "</li>\n" +
+                        "        <li>full name:" + user.getFullName() + "</li>\n" +
+                        "        <li>phone number: " + user.getPhoneNumber() + "</li>\n" +
+                        "        <li>email: " + user.getEmail() + "</li>\n" +
+                        "        <li>credit: " + user.getCredit() + "</li>\n" +
+                        "        <form action=\"\" method=\"POST\">\n" +
+                        "            <button type=\"submit\">increase</button>\n" +
+                        "            <input type=\"text\" name=\"credit\" value=\"\" />\n" +
+                        "        </form>\n" +
+                        "    </ul>\n" +
+                        "</body>\n" +
+                        "</html>";
+                context.html(finalHtml);
+            }
+        });
 
     }
 
