@@ -10,7 +10,6 @@ public class Restaurant {
     private Location location;
     private String logo;
     private List<Food> menu;
-
     public String getName() {
         return name;
     }
@@ -30,6 +29,10 @@ public class Restaurant {
 
     public String getId() {
         return id;
+    }
+
+    public String getLogo() {
+        return logo;
     }
 
     public void addFoodToMenu(String jsonString) {
