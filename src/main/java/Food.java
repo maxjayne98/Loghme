@@ -1,4 +1,4 @@
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
+//import com.sun.xml.internal.ws.api.ha.StickyFeature;
 
 public class Food {
     private String name;
