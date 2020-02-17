@@ -87,10 +87,11 @@ public class Server{
                         for (Food food : restaurantFoods){
                             String row = "<li>\n" +
                                     "                    <img src=" + food.getImage() + " alt=\"logo\">\n" +
-                                    "                    <div>" + food.getName()+ "</div>\n" +
-                                    "                    <div>" + food.getPrice().toString() + "</div>\n" +
-                                    "                    <form action=\"\" method=\"POST\">\n" +
-                                    "                        <button type=\"submit\">addToCart</button>\n" +
+                                    "                    <form action=\"/addToCart\" method=\"POST\">\n" +
+                                    "                       <div>" + food.getName()+ "</div>\n" +
+                                    "                       <input type=\"hidden\" name=\"foodName\" value=\"" + food.getName() +"\"></input>\n" +
+                                    "                       <div>" + food.getPrice().toString() + "</div>\n" +
+                                    "                       <button type=\"submit\">addToCart</button>\n" +
                                     "                    </form>\n" +
                                     "                </li>";
                             menu = menu + row;
@@ -140,6 +141,16 @@ public class Server{
                     context.status(404);
                 }
 
+            }
+        });
+        app.post("/addToCard", new Handler() {
+            @Override
+            public void handle(@NotNull Context context) throws Exception {
+
+                String temp = context.formParam("foodName");
+                System.out.println(temp);
+//                context.result(Objects.requireNonNull(context.formParam("foodName")));
+                context.result("heree");
             }
         });
         app.get("user", new Handler() {
