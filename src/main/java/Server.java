@@ -10,6 +10,7 @@ import java.util.Set;
 
 public class Server{
 
+
     public static void createServer(final Loghme loghme){
         Javalin app = Javalin.create().start(8080);
         app.get("/", ctx -> ctx.html("<h1>Welcome to Loghmeh</h1>"));
@@ -90,6 +91,7 @@ public class Server{
                                     "                    <form action=\"/addToCard\" method=\"POST\">\n" +
                                     "                       <div>" + food.getName()+ "</div>\n" +
                                     "                       <input type=\"hidden\" name=\"foodName\" value=\"" + food.getName() +"\"></input>\n" +
+                                    "                       <input type=\"hidden\" name=\"restaurantId\" value=\"" + restaurant.getId() +"\"></input>\n" +
                                     "                       <div>" + food.getPrice().toString() + "</div>\n" +
                                     "                       <button type=\"submit\">addToCart</button>\n" +
                                     "                    </form>\n" +
@@ -147,10 +149,34 @@ public class Server{
             @Override
             public void handle(@NotNull Context context) throws Exception {
 
-                String temp = context.formParam("foodName");
-                System.out.println(temp);
-//                context.result(Objects.requireNonNull(context.formParam("foodName")));
-                context.result("heree");
+                String foodName = context.formParam("foodName");
+                String restaurantId = context.formParam("restaurantId");
+                Restaurant restaurant = loghme.getRestaurant(restaurantId);
+                Food food = restaurant.findFoodInMenu(foodName);
+                User user = loghme.getUser();
+                boolean addToCartStatus = user.addToCart(restaurant, food);
+                if (addToCartStatus){
+                    String finalHtml = "<!DOCTYPE html>\n" +
+                            "<html lang=\"en\">\n" +
+                            "<head>\n" +
+                            "    <meta charset=\"UTF-8\">\n" +
+                            "    <title>User</title>\n" +
+                            "    <style>\n" +
+                            "        body {\n" +
+                            "        \tdirection: rtl\n" +
+                            "        }\n" +
+                            "    </style>\n" +
+                            "</head>\n" +
+                            "<body>\n" +
+                            "<h3>" + foodName + " در " + restaurant.getName() + " به سبد شما اضافه شد </h3>" +
+                            "</body>\n" +
+                            "</html>";
+                    context.html(finalHtml);
+                }
+                else {
+                    context.result("your selected food can't be added to your cart");
+                }
+
             }
         });
         app.get("user", new Handler() {
