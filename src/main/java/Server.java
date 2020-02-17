@@ -179,7 +179,23 @@ public class Server{
                     context.html(finalHtml);
                 }
                 else {
-                    context.result("your selected food can't be added to your cart");
+
+                    String finalHtml = "<!DOCTYPE html>\n" +
+                            "<html lang=\"en\">\n" +
+                            "<head>\n" +
+                            "    <meta charset=\"UTF-8\">\n" +
+                            "    <title>User</title>\n" +
+                            "    <style>\n" +
+                            "        body {\n" +
+                            "        \tdirection: rtl\n" +
+                            "        }\n" +
+                            "    </style>\n" +
+                            "</head>\n" +
+                            "<body>\n" +
+                            "<h3> شما قادر به اضافه کردن این غذا به سبد خود نیستید !</h3>" +
+                            "</body>\n" +
+                            "</html>";
+                    context.html(finalHtml);
                 }
 
             }
@@ -238,7 +254,7 @@ public class Server{
                             "</body>\n" +
                             "</html>";
                     context.html(finalHtml);
-                    return;//this not work fix it
+                    return;
                 }
                 user.setCredit(user.getCredit() + Integer.parseInt(userNewCredit));
             }
