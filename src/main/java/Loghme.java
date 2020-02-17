@@ -91,7 +91,7 @@ public class Loghme {
         String selectedFoodName = findFieldInJsonString(jsonString, "foodName");
         Food selectedFood = selectedRestaurant.findFoodInMenu(selectedFoodName);
         if (selectedFood != null){
-            user.addToCart(jsonString,selectedRestaurant,selectedFood);
+            user.addToCart(selectedRestaurant,selectedFood);
         }
         else {
             System.out.println("your selected Restaurant does not have this food ...");
