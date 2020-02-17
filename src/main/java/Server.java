@@ -3,7 +3,6 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -213,7 +212,44 @@ public class Server{
 
             }
         });
-
+        app.get("ViewCart", new Handler() {
+            @Override
+            public void handle(@NotNull Context context) throws Exception {
+                Cart userCart = loghme.getUser().getCart();
+                List<Food> FoodList = userCart.getFoods();
+                if(FoodList.size() == 0){
+                    context.html("<h2>The Cart is Empty!!</h2>");
+                    return;
+                }
+                String rows = "";
+                for (Food food: FoodList){
+                    String row = "<li>" + food.getName() + ": " + food.getPrice() + "</li>\n";
+                    rows = rows.concat(row);
+                }
+                String CartRestaurantName = userCart.getRestaurantName();
+                String finalHtml = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>User</title>\n" +
+                        "    <style>\n" +
+                        "        li, div, form {\n" +
+                        "        \tpadding: 5px\n" +
+                        "        }\n" +
+                        "    </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "    <div>" + CartRestaurantName + "</div>\n" +
+                        "    <ul>\n" + rows +
+                        "    </ul>\n" +
+                        "    <form action=\"\" method=\"POST\">\n" +
+                        "        <button type=\"submit\">finalize</button>\n" +
+                        "    </form>\n" +
+                        "</body>\n" +
+                        "</html>";
+                context.html(finalHtml);
+            }
+        });
     }
 
 

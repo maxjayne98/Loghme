@@ -82,7 +82,7 @@ public class Loghme {
         return user.finalizeOrder();
     }
 
-    public List<Food> getCart() {
+    public Cart getCart() {
         return user.getCart();
     }
 

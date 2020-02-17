@@ -61,11 +61,15 @@ public class User {
             System.out.println("your selected food can't be added to your cart ...");
         }
     }
-    public List<Food> getCart(){
-        List<Food> menu = cart.getFoods();
-        getFoodnames(menu);
-        return menu;
+
+    public Cart getCart() {
+        return cart;
     }
+//    public List<Food> getCart(){
+//        List<Food> menu = cart.getFoods();
+////        getFoodnames(menu);
+//        return menu;
+//    }
 
     public String getFoodnames(List<Food> menu){
         Gson gson = new Gson();
