@@ -164,7 +164,7 @@ public class Server{
                         "        <li>phone number: " + user.getPhoneNumber() + "</li>\n" +
                         "        <li>email: " + user.getEmail() + "</li>\n" +
                         "        <li>credit: " + user.getCredit() + " Toman</li>\n" +
-                        "        <form action=\"\" method=\"POST\">\n" +
+                        "        <form action=\"/addCredit\" method=\"POST\">\n" +
                         "            <button type=\"submit\">increase</button>\n" +
                         "            <input type=\"text\" name=\"credit\" value=\"\" />\n" +
                         "        </form>\n" +
@@ -174,7 +174,7 @@ public class Server{
                 context.html(finalHtml);
             }
         });
-        app.post("user", new Handler() {
+        app.post("/addCredit", new Handler() {
             @Override
             public void handle(@NotNull Context context) throws Exception {
                 User user = loghme.getUser();
@@ -183,33 +183,6 @@ public class Server{
                     return;//this not work fix it
                 }
                 user.setCredit(user.getCredit() + Integer.parseInt(userNewCredit));
-                String finalHtml = "<!DOCTYPE html>\n" +
-                        "<html lang=\"en\">\n" +
-                        "<head>\n" +
-                        "    <meta charset=\"UTF-8\">\n" +
-                        "    <title>User</title>\n" +
-                        "    <style>\n" +
-                        "        li {\n" +
-                        "        \tpadding: 5px\n" +
-                        "        }\n" +
-                        "    </style>\n" +
-                        "</head>\n" +
-                        "<body>\n" +
-                        "    <ul>\n" +
-                        "        <li>id: " + user.getId()+ "</li>\n" +
-                        "        <li>full name:" + user.getFullName() + "</li>\n" +
-                        "        <li>phone number: " + user.getPhoneNumber() + "</li>\n" +
-                        "        <li>email: " + user.getEmail() + "</li>\n" +
-                        "        <li>credit: " + user.getCredit() + " Toman</li>\n" +
-                        "        <form action=\"\" method=\"POST\">\n" +
-                        "            <button type=\"submit\">increase</button>\n" +
-                        "            <input type=\"text\" name=\"credit\" value=\"\" />\n" +
-                        "        </form>\n" +
-                        "    </ul>\n" +
-                        "</body>\n" +
-                        "</html>";
-                context.html(finalHtml);
-
             }
         });
         app.get("ViewCart", new Handler() {
