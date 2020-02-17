@@ -233,7 +233,22 @@ public class Server{
                 Cart userCart = loghme.getUser().getCart();
                 List<Food> FoodList = userCart.getFoods();
                 if(FoodList.size() == 0){
-                    context.html("<h2>The Cart is Empty!!</h2>");
+                    String finalHtml = "<!DOCTYPE html>\n" +
+                            "<html lang=\"en\">\n" +
+                            "<head>\n" +
+                            "    <meta charset=\"UTF-8\">\n" +
+                            "    <title>User</title>\n" +
+                            "    <style>\n" +
+                            "        body {\n" +
+                            "        \tdirection: rtl\n" +
+                            "        }\n" +
+                            "    </style>\n" +
+                            "</head>\n" +
+                            "<body>\n" +
+                            "<h3> کارت شما خالیست </h3>" +
+                            "</body>\n" +
+                            "</html>";
+                    context.html(finalHtml);
                     return;
                 }
                 String rows = "";
