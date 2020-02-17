@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Set;
 
 
-public class Server{
+public class Server {
 
 
-    public static void createServer(final Loghme loghme){
+    public static void createServer(final Loghme loghme) {
         Javalin app = Javalin.create().start(8080);
         app.get("/", new Handler() {
             @Override
@@ -38,11 +38,11 @@ public class Server{
                         "    </style>\n" +
                         "</head>\n" +
                         "<body>\n" +
-                        "<div>"+
+                        "<div>" +
                         "<h1> به لقمه خوش آمدید</h1>" +
-                        "<a  href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>"+
-                        "<a  href=\"http://localhost:8080/user\">اطلاعات کاربری</a>"+
-                        "</div>"+
+                        "<a  href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>" +
+                        "<a  href=\"http://localhost:8080/user\">اطلاعات کاربری</a>" +
+                        "</div>" +
                         "</body>\n" +
                         "</html>";
                 context.html(finalHtml);
@@ -57,16 +57,16 @@ public class Server{
                 User user = loghme.getUser();
                 Location userLocation = user.getLocation();
                 String result = " ";
-                for (String key: keys) {
+                for (String key : keys) {
                     Restaurant restaurant = restaurants.get(key);
-                    Double distance = Math.sqrt(Math.pow(userLocation.getXLocation() - restaurant.getXLocation(),2)+Math.pow(userLocation.getYLocation() - restaurant.getYLocation(),2));
-                    if (distance >= 170){
+                    Double distance = Math.sqrt(Math.pow(userLocation.getXLocation() - restaurant.getXLocation(), 2) + Math.pow(userLocation.getYLocation() - restaurant.getYLocation(), 2));
+                    if (distance >= 170) {
                         continue;
                     }
                     String row = "<tr>\n" +
-                            "            <td>"+ restaurant.getId() +"</td>\n" +
+                            "            <td>" + restaurant.getId() + "</td>\n" +
                             "            <td><img class=\"logo\" src=" + restaurant.getLogo() + " alt=\"logo\"></td>\n" +
-                            "            <td><a href=\"http://localhost:8080/getRestaurant/"+restaurant.getId()+"\">" + restaurant.getName() + "</a></td>\n" +
+                            "            <td><a href=\"http://localhost:8080/getRestaurant/" + restaurant.getId() + "\">" + restaurant.getName() + "</a></td>\n" +
                             "        </tr>";
                     result = result + row;
                 }
@@ -94,7 +94,7 @@ public class Server{
                         "    </style>\n" +
                         "</head>\n" +
                         "<body>\n" +
-                        "<a style=\"text-align:center;display:block;\" href=\"http://localhost:8080/\">صفحه اصلی</a>"+
+                        "<a style=\"text-align:center;display:block;\" href=\"http://localhost:8080/\">صفحه اصلی</a>" +
                         "    <table>\n" +
                         "        <tr>\n" +
                         "            <th>id</th>\n" +
@@ -114,19 +114,19 @@ public class Server{
                 User user = loghme.getUser();
                 Location userLocation = user.getLocation();
                 Restaurant restaurant = loghme.getRestaurant(restaurantId);
-                if (restaurant != null){
-                    Double distance = Math.sqrt(Math.pow(userLocation.getXLocation() - restaurant.getXLocation(),2)+Math.pow(userLocation.getYLocation() - restaurant.getYLocation(),2));
-                    if (distance <= 170){
+                if (restaurant != null) {
+                    Double distance = Math.sqrt(Math.pow(userLocation.getXLocation() - restaurant.getXLocation(), 2) + Math.pow(userLocation.getYLocation() - restaurant.getYLocation(), 2));
+                    if (distance <= 170) {
                         List<Food> restaurantFoods;
                         restaurantFoods = restaurant.getMenu();
                         String menu = " ";
-                        for (Food food : restaurantFoods){
+                        for (Food food : restaurantFoods) {
                             String row = "<li>\n" +
                                     "                    <img src=" + food.getImage() + " alt=\"logo\">\n" +
                                     "                    <form action=\"/addToCard\" method=\"POST\">\n" +
-                                    "                       <div>" + food.getName()+ "</div>\n" +
-                                    "                       <input type=\"hidden\" name=\"foodName\" value=\"" + food.getName() +"\"></input>\n" +
-                                    "                       <input type=\"hidden\" name=\"restaurantId\" value=\"" + restaurant.getId() +"\"></input>\n" +
+                                    "                       <div>" + food.getName() + "</div>\n" +
+                                    "                       <input type=\"hidden\" name=\"foodName\" value=\"" + food.getName() + "\"></input>\n" +
+                                    "                       <input type=\"hidden\" name=\"restaurantId\" value=\"" + restaurant.getId() + "\"></input>\n" +
                                     "                       <div>" + food.getPrice().toString() + "</div>\n" +
                                     "                       <button type=\"submit\">addToCart</button>\n" +
                                     "                    </form>\n" +
@@ -154,15 +154,15 @@ public class Server{
                                 "    </style>\n" +
                                 "</head>\n" +
                                 "<body>\n" +
-                                "<a style=\"margin-right:10px\" href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>"+
+                                "<a style=\"margin-right:10px\" href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>" +
                                 "    <ul>\n" +
                                 "        <li>id: " + restaurant.getId() + "</li>\n" +
-                                "        <li>name: " + restaurant.getName() +"</li>\n" +
-                                "        <li>location: (" + restaurant.getXLocation() + ", " +restaurant.getYLocation() + ")</li>\n" +
-                                "        <li>logo: <img src=" + restaurant.getLogo() +" alt=\"logo\"></li>\n" +
+                                "        <li>name: " + restaurant.getName() + "</li>\n" +
+                                "        <li>location: (" + restaurant.getXLocation() + ", " + restaurant.getYLocation() + ")</li>\n" +
+                                "        <li>logo: <img src=" + restaurant.getLogo() + " alt=\"logo\"></li>\n" +
                                 "        <li>menu: \n" +
                                 "        \t<ul>\n" +
-                                          menu          +
+                                menu +
                                 "        \t</ul>\n" +
                                 "        </li>\n" +
                                 "    </ul>\n" +
@@ -170,12 +170,10 @@ public class Server{
                                 "</html>";
                         context.html(finalHtml);
 
-                    }
-                    else{
+                    } else {
                         context.status(403);
                     }
-                }
-                else{
+                } else {
                     context.status(404);
                 }
 
@@ -191,7 +189,7 @@ public class Server{
                 Food food = restaurant.findFoodInMenu(foodName);
                 User user = loghme.getUser();
                 boolean addToCartStatus = user.addToCart(restaurant, food);
-                if (addToCartStatus){
+                if (addToCartStatus) {
                     String finalHtml = "<!DOCTYPE html>\n" +
                             "<html lang=\"en\">\n" +
                             "<head>\n" +
@@ -205,13 +203,12 @@ public class Server{
                             "</head>\n" +
                             "<body>\n" +
                             "<h3>" + foodName + " در " + restaurant.getName() + " به سبد شما اضافه شد </h3>" +
-                            "<a href=\"http://localhost:8080/getRestaurant/"+restaurantId+"\">بازگشت</a>"+
-                            "<a style=\"margin-right:10px\" href=\"http://localhost:8080/ViewCart\">نمایش کارت</a>"+
+                            "<a href=\"http://localhost:8080/getRestaurant/" + restaurantId + "\">بازگشت</a>" +
+                            "<a style=\"margin-right:10px\" href=\"http://localhost:8080/ViewCart\">نمایش کارت</a>" +
                             "</body>\n" +
                             "</html>";
                     context.html(finalHtml);
-                }
-                else {
+                } else {
 
                     String finalHtml = "<!DOCTYPE html>\n" +
                             "<html lang=\"en\">\n" +
@@ -226,7 +223,7 @@ public class Server{
                             "</head>\n" +
                             "<body>\n" +
                             "<h3> شما قادر به اضافه کردن این غذا به سبد خود نیستید !</h3>" +
-                            "<a style=\"margin-right:10px\" href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>"+
+                            "<a style=\"margin-right:10px\" href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>" +
                             "</body>\n" +
                             "</html>";
                     context.html(finalHtml);
@@ -250,9 +247,9 @@ public class Server{
                         "    </style>\n" +
                         "</head>\n" +
                         "<body>\n" +
-                        "<a style=\"margin-right:10px\" href=\"http://localhost:8080/\">صفحه اصلی</a>"+
+                        "<a style=\"margin-right:10px\" href=\"http://localhost:8080/\">صفحه اصلی</a>" +
                         "    <ul>\n" +
-                        "        <li>id: " + user.getId()+ "</li>\n" +
+                        "        <li>id: " + user.getId() + "</li>\n" +
                         "        <li>full name:" + user.getFullName() + "</li>\n" +
                         "        <li>phone number: " + user.getPhoneNumber() + "</li>\n" +
                         "        <li>email: " + user.getEmail() + "</li>\n" +
@@ -292,6 +289,24 @@ public class Server{
                     return;
                 }
                 user.setCredit(user.getCredit() + Integer.parseInt(userNewCredit));
+                String finalHtml = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>User</title>\n" +
+                        "    <style>\n" +
+                        "        body {\n" +
+                        "        \tdirection: rtl\n" +
+                        "        }\n" +
+                        "    </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "<h3> حساب شما شارژ شد </h3>" +
+                        "<h3> موجودی فعلی شما :" + user.getCredit() +" تومان </h3>" +
+                        "<a  href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>" +
+                        "</body>\n" +
+                        "</html>";
+                context.html(finalHtml);
             }
         });
         app.get("ViewCart", new Handler() {
@@ -299,7 +314,7 @@ public class Server{
             public void handle(@NotNull Context context) throws Exception {
                 Cart userCart = loghme.getUser().getCart();
                 List<Food> FoodList = userCart.getFoods();
-                if(FoodList.size() == 0){
+                if (FoodList.size() == 0) {
                     String finalHtml = "<!DOCTYPE html>\n" +
                             "<html lang=\"en\">\n" +
                             "<head>\n" +
@@ -319,7 +334,7 @@ public class Server{
                     return;
                 }
                 String rows = "";
-                for (Food food: FoodList){
+                for (Food food : FoodList) {
                     String row = "<li>" + food.getName() + ": " + food.getPrice() + "</li>\n";
                     rows = rows.concat(row);
                 }
@@ -352,10 +367,9 @@ public class Server{
             public void handle(@NotNull Context context) throws Exception {
                 User user = loghme.getUser();
                 Cart cart = user.getCart();
-                if(cart.isEmpty() ||  cart.getTotal() > user.getCredit()){
+                if (cart.isEmpty() || cart.getTotal() > user.getCredit()) {
                     context.status(400);
-                }
-                else{
+                } else {
                     String finalHtml = "<!DOCTYPE html>\n" +
                             "<html lang=\"en\">\n" +
                             "<head>\n" +

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class User {
     Cart cart = new Cart();
-    Location location = new Location(0,0);
+    Location location = new Location(0, 0);
     String id;
     String fullName;
     String phoneNumber;
@@ -49,15 +49,14 @@ public class User {
         return location;
     }
 
-    public boolean addToCart(Restaurant selectedRestaurant, Food selectedFood){
-        if (cart.getRestaurantName() == null){
+    public boolean addToCart(Restaurant selectedRestaurant, Food selectedFood) {
+        if (cart.getRestaurantName() == null) {
             cart.setRestaurantName(selectedRestaurant.getName());
         }
-        if (selectedRestaurant.getName().equals(cart.getRestaurantName())){
+        if (selectedRestaurant.getName().equals(cart.getRestaurantName())) {
             cart.addFood(selectedFood);
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -71,10 +70,10 @@ public class User {
 //        return menu;
 //    }
 
-    public String getFoodnames(List<Food> menu){
+    public String getFoodnames(List<Food> menu) {
         Gson gson = new Gson();
         List<String> Foodnames = new ArrayList<String>();
-        for(Food food: menu){
+        for (Food food : menu) {
             Foodnames.add(food.getName());
         }
         String jsonnString = gson.toJson(Foodnames);

@@ -2,7 +2,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Restaurant {
 
     private String id;
@@ -10,9 +12,6 @@ public class Restaurant {
     private Location location;
     private String logo;
     private List<Food> menu;
-    public String getName() {
-        return name;
-    }
 
     public Restaurant(String id, String name, Location location, String logo, List<Food> menu) {
         this.menu = new ArrayList<Food>();
@@ -21,6 +20,10 @@ public class Restaurant {
         this.location = location;
         this.logo = logo;
         this.menu = menu;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public List<Food> getMenu() {
@@ -43,31 +46,33 @@ public class Restaurant {
         Integer price = jsonObject.get("price").getAsInt();
         float popularity = jsonObject.get("popularity").getAsFloat();
         String image = jsonObject.get("image").getAsString();
-        Food newFood = new Food(foodName,description,popularity,price, image);
+        Food newFood = new Food(foodName, description, popularity, price, image);
         menu.add(newFood);
     }
 
-    public double findFoodsPopulationAvg(){
+    public double findFoodsPopulationAvg() {
         double sum = 0.0;
-        for (int i = 0; i < menu.size() ; i++) {
+        for (int i = 0; i < menu.size(); i++) {
             sum += menu.get(i).getPopularity();
         }
-        return sum/menu.size();
+        return sum / menu.size();
 
     }
 
     public Food findFoodInMenu(String foodName) {
-        for (int i = 0; i < menu.size() ; i++) {
+        for (int i = 0; i < menu.size(); i++) {
             if (menu.get(i).getName().equals(foodName)) {
                 return menu.get(i);
             }
         }
         return null;
     }
-    public Integer getXLocation(){
+
+    public Integer getXLocation() {
         return location.getXLocation();
     }
-    public Integer getYLocation(){
+
+    public Integer getYLocation() {
         return location.getYLocation();
     }
 }
