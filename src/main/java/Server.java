@@ -13,7 +13,12 @@ public class Server{
 
     public static void createServer(final Loghme loghme){
         Javalin app = Javalin.create().start(8080);
-        app.get("/", ctx -> ctx.html("<h1>Welcome to Loghmeh</h1>"));
+        app.get("/", new Handler() {
+            @Override
+            public void handle(@NotNull Context context) throws Exception {
+                context.html("<h1 style=\"text-align:center\">Welcome to Loghmeh</h1>");
+            }
+        });
         app.get("/getRestaurants", new Handler() {
             @Override
             public void handle(@NotNull Context context) throws Exception {
