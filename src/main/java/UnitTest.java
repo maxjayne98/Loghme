@@ -1,4 +1,3 @@
-import com.google.gson.Gson;
 import org.junit.*;
 
 import java.util.List;
@@ -6,7 +5,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class Test {
+public class UnitTest {
     Loghme loghme = new Loghme();
 
     @Before
