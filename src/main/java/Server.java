@@ -37,7 +37,7 @@ public class Server{
                     String row = "<tr>\n" +
                             "            <td>"+ restaurant.getId() +"</td>\n" +
                             "            <td><img class=\"logo\" src=" + restaurant.getLogo() + " alt=\"logo\"></td>\n" +
-                            "            <td>" + restaurant.getName() + "</td>\n" +
+                            "            <td><a href=\"http://localhost:8080/getRestaurant/"+restaurant.getId()+"\">" + restaurant.getName() + "</a></td>\n" +
                             "        </tr>";
                     result = result + row;
                 }
