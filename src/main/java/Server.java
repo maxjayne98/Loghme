@@ -84,8 +84,8 @@ public class Server{
                 User user = loghme.getUser();
                 Location userLocation = user.getLocation();
                 Restaurant restaurant = loghme.getRestaurant(restaurantId);
-                Double distance = Math.sqrt(Math.pow(userLocation.getXLocation() - restaurant.getXLocation(),2)+Math.pow(userLocation.getYLocation() - restaurant.getYLocation(),2));
                 if (restaurant != null){
+                    Double distance = Math.sqrt(Math.pow(userLocation.getXLocation() - restaurant.getXLocation(),2)+Math.pow(userLocation.getYLocation() - restaurant.getYLocation(),2));
                     if (distance <= 170){
                         List<Food> restaurantFoods;
                         restaurantFoods = restaurant.getMenu();
