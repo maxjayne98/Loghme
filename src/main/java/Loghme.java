@@ -10,7 +10,7 @@ import com.google.gson.JsonParser;
 
 public class Loghme {
     private HashMap<String, Restaurant> Restaurants = new HashMap<String, Restaurant>();
-    private User user = new User("1", "Ehsan KhamesPanah","+989123456789", "ekhamespanah@yahoo.com",50000);
+    private User user = new User("1", "Ehsan KhamesPanah","+989123456789", "ekhamespanah@yahoo.com",15000);
     static Scanner input = new Scanner(System.in);
 
 
