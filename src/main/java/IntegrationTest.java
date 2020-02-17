@@ -29,4 +29,16 @@ public class IntegrationTest {
         HttpResponse response3 = Unirest.get("http://localhost:8080/getRestaurant/5eeeeeeeeeeeeeeeeeeeeeee").asString();
         assertEquals(response3.getStatus() , 404);
     }
+
+    @Test
+    public void Finalize(){
+//        Unirest.get();
+        HttpResponse response1 = Unirest.post("http://localhost:8080/finalizeOrder").asString();
+        assertEquals(response1.getStatus(), 400);
+
+//        HttpResponse response2 = Unirest.get("http://localhost:8080/getRestaurant/5e445b6c6ab90e0af6068da2").asString();
+//        assertEquals(response2.getStatus() , 403);
+//        HttpResponse response3 = Unirest.get("http://localhost:8080/getRestaurant/5eeeeeeeeeeeeeeeeeeeeeee").asString();
+//        assertEquals(response3.getStatus() , 404);
+    }
 }
