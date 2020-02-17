@@ -87,7 +87,7 @@ public class Server{
                         for (Food food : restaurantFoods){
                             String row = "<li>\n" +
                                     "                    <img src=" + food.getImage() + " alt=\"logo\">\n" +
-                                    "                    <form action=\"/addToCart\" method=\"POST\">\n" +
+                                    "                    <form action=\"/addToCard\" method=\"POST\">\n" +
                                     "                       <div>" + food.getName()+ "</div>\n" +
                                     "                       <input type=\"hidden\" name=\"foodName\" value=\"" + food.getName() +"\"></input>\n" +
                                     "                       <div>" + food.getPrice().toString() + "</div>\n" +
