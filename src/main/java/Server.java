@@ -289,6 +289,24 @@ public class Server {
                     return;
                 }
                 user.setCredit(user.getCredit() + Integer.parseInt(userNewCredit));
+                String finalHtml = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>User</title>\n" +
+                        "    <style>\n" +
+                        "        body {\n" +
+                        "        \tdirection: rtl\n" +
+                        "        }\n" +
+                        "    </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "<h3> حساب شما شارژ شد </h3>" +
+                        "<h3> موجودی فعلی شما :" + user.getCredit() +" تومان </h3>" +
+                        "<a  href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>" +
+                        "</body>\n" +
+                        "</html>";
+                context.html(finalHtml);
             }
         });
         app.get("ViewCart", new Handler() {
