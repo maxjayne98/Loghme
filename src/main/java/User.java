@@ -87,14 +87,8 @@ public class User {
         return jsonnString;
     }
 
-    public String finalizeOrder() {
-        List<Food> menu = cart.getFoods();
-        String jsonString = getFoodnames(menu);
-        System.out.println("Your Order has finalized!!");
-        cart.setRestaurantName(null);
-        cart.updateCount(0);
-        cart.emptyFoods();
-        return jsonString;
+    public void finalizeOrder() {
+        cart.emptyCart();
     }
 }
 
