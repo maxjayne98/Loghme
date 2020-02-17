@@ -40,10 +40,22 @@ public class Cart {
         return selectedFoods;
     }
 
-    public void emptyFoods(){
+    public void emptyCart(){
         selectedFoods.clear();
+        setRestaurantName(null);
+        updateCount(0);
     }
     public Integer getCount() {
         return count;
+    }
+    public Integer getTotal(){
+        Integer Total = 0;
+        for (Food food: selectedFoods){
+            Total += food.getPrice();
+        }
+        return Total;
+    }
+    public boolean isEmpty(){
+     return selectedFoods.isEmpty();
     }
 }
