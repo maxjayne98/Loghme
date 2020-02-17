@@ -33,12 +33,15 @@ public class Server{
                         "        \theight: 100vh;\n" +
                         "        \tjustify-content: center;\n" +
                         "        \talign-items: center;\n" +
+                        "        \tflex-direction: column;\n" +
                         "        }\n" +
                         "    </style>\n" +
                         "</head>\n" +
                         "<body>\n" +
                         "<div>"+
                         "<h1> به لقمه خوش آمدید</h1>" +
+                        "<a  href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>"+
+                        "<a  href=\"http://localhost:8080/user\">اطلاعات کاربری</a>"+
                         "</div>"+
                         "</body>\n" +
                         "</html>";
@@ -71,7 +74,7 @@ public class Server{
                 String finalHtml = "<!DOCTYPE html>\n" +
                         "<html lang=\"en\">\n" +
                         "<head>\n" +
-                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n" +
                         "    <title>Restaurants</title>\n" +
                         "    <style>\n" +
                         "        table {\n" +
@@ -91,6 +94,7 @@ public class Server{
                         "    </style>\n" +
                         "</head>\n" +
                         "<body>\n" +
+                        "<a style=\"text-align:center;display:block;\" href=\"http://localhost:8080/\">صفحه اصلی</a>"+
                         "    <table>\n" +
                         "        <tr>\n" +
                         "            <th>id</th>\n" +
@@ -150,6 +154,7 @@ public class Server{
                                 "    </style>\n" +
                                 "</head>\n" +
                                 "<body>\n" +
+                                "<a style=\"margin-right:10px\" href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>"+
                                 "    <ul>\n" +
                                 "        <li>id: " + restaurant.getId() + "</li>\n" +
                                 "        <li>name: " + restaurant.getName() +"</li>\n" +
@@ -200,6 +205,8 @@ public class Server{
                             "</head>\n" +
                             "<body>\n" +
                             "<h3>" + foodName + " در " + restaurant.getName() + " به سبد شما اضافه شد </h3>" +
+                            "<a href=\"http://localhost:8080/getRestaurant/"+restaurantId+"\">بازگشت</a>"+
+                            "<a style=\"margin-right:10px\" href=\"http://localhost:8080/ViewCart\">نمایش کارت</a>"+
                             "</body>\n" +
                             "</html>";
                     context.html(finalHtml);
@@ -219,6 +226,7 @@ public class Server{
                             "</head>\n" +
                             "<body>\n" +
                             "<h3> شما قادر به اضافه کردن این غذا به سبد خود نیستید !</h3>" +
+                            "<a style=\"margin-right:10px\" href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>"+
                             "</body>\n" +
                             "</html>";
                     context.html(finalHtml);
@@ -242,6 +250,7 @@ public class Server{
                         "    </style>\n" +
                         "</head>\n" +
                         "<body>\n" +
+                        "<a style=\"margin-right:10px\" href=\"http://localhost:8080/\">صفحه اصلی</a>"+
                         "    <ul>\n" +
                         "        <li>id: " + user.getId()+ "</li>\n" +
                         "        <li>full name:" + user.getFullName() + "</li>\n" +
