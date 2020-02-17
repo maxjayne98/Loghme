@@ -79,7 +79,8 @@ public class Loghme {
     }
 
     public String finalizeOrder() {
-        return user.finalizeOrder();
+//        return user.finalizeOrder();
+    return " ";
     }
 
     public Cart getCart() {
