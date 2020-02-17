@@ -16,7 +16,33 @@ public class Server{
         app.get("/", new Handler() {
             @Override
             public void handle(@NotNull Context context) throws Exception {
-                context.html("<h1 style=\"text-align:center\">Welcome to Loghmeh</h1>");
+                String finalHtml = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>User</title>\n" +
+                        "    <style>\n" +
+                        "        body {\n" +
+                        "        \tdirection: rtl\n" +
+                        "        }\n" +
+                        "        h1 {\n" +
+                        "        \ttext-align: center\n" +
+                        "        }\n" +
+                        "        div {\n" +
+                        "        \tdisplay: flex;\n" +
+                        "        \theight: 100vh;\n" +
+                        "        \tjustify-content: center;\n" +
+                        "        \talign-items: center;\n" +
+                        "        }\n" +
+                        "    </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "<div>"+
+                        "<h1> به لقمه خوش آمدید</h1>" +
+                        "</div>"+
+                        "</body>\n" +
+                        "</html>";
+                context.html(finalHtml);
             }
         });
         app.get("/getRestaurants", new Handler() {
