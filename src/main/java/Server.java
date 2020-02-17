@@ -16,7 +16,36 @@ public class Server{
         app.get("/", new Handler() {
             @Override
             public void handle(@NotNull Context context) throws Exception {
-                context.html("<h1 style=\"text-align:center\">Welcome to Loghmeh</h1>");
+                String finalHtml = "<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <title>User</title>\n" +
+                        "    <style>\n" +
+                        "        body {\n" +
+                        "        \tdirection: rtl\n" +
+                        "        }\n" +
+                        "        h1 {\n" +
+                        "        \ttext-align: center\n" +
+                        "        }\n" +
+                        "        div {\n" +
+                        "        \tdisplay: flex;\n" +
+                        "        \theight: 100vh;\n" +
+                        "        \tjustify-content: center;\n" +
+                        "        \talign-items: center;\n" +
+                        "        \tflex-direction: column;\n" +
+                        "        }\n" +
+                        "    </style>\n" +
+                        "</head>\n" +
+                        "<body>\n" +
+                        "<div>"+
+                        "<h1> به لقمه خوش آمدید</h1>" +
+                        "<a  href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>"+
+                        "<a  href=\"http://localhost:8080/user\">اطلاعات کاربری</a>"+
+                        "</div>"+
+                        "</body>\n" +
+                        "</html>";
+                context.html(finalHtml);
             }
         });
         app.get("/getRestaurants", new Handler() {
@@ -37,7 +66,7 @@ public class Server{
                     String row = "<tr>\n" +
                             "            <td>"+ restaurant.getId() +"</td>\n" +
                             "            <td><img class=\"logo\" src=" + restaurant.getLogo() + " alt=\"logo\"></td>\n" +
-                            "            <td>" + restaurant.getName() + "</td>\n" +
+                            "            <td><a href=\"http://localhost:8080/getRestaurant/"+restaurant.getId()+"\">" + restaurant.getName() + "</a></td>\n" +
                             "        </tr>";
                     result = result + row;
                 }
@@ -45,7 +74,7 @@ public class Server{
                 String finalHtml = "<!DOCTYPE html>\n" +
                         "<html lang=\"en\">\n" +
                         "<head>\n" +
-                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n" +
                         "    <title>Restaurants</title>\n" +
                         "    <style>\n" +
                         "        table {\n" +
@@ -65,6 +94,7 @@ public class Server{
                         "    </style>\n" +
                         "</head>\n" +
                         "<body>\n" +
+                        "<a style=\"text-align:center;display:block;\" href=\"http://localhost:8080/\">صفحه اصلی</a>"+
                         "    <table>\n" +
                         "        <tr>\n" +
                         "            <th>id</th>\n" +
@@ -124,6 +154,7 @@ public class Server{
                                 "    </style>\n" +
                                 "</head>\n" +
                                 "<body>\n" +
+                                "<a style=\"margin-right:10px\" href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>"+
                                 "    <ul>\n" +
                                 "        <li>id: " + restaurant.getId() + "</li>\n" +
                                 "        <li>name: " + restaurant.getName() +"</li>\n" +
@@ -174,6 +205,8 @@ public class Server{
                             "</head>\n" +
                             "<body>\n" +
                             "<h3>" + foodName + " در " + restaurant.getName() + " به سبد شما اضافه شد </h3>" +
+                            "<a href=\"http://localhost:8080/getRestaurant/"+restaurantId+"\">بازگشت</a>"+
+                            "<a style=\"margin-right:10px\" href=\"http://localhost:8080/ViewCart\">نمایش کارت</a>"+
                             "</body>\n" +
                             "</html>";
                     context.html(finalHtml);
@@ -193,6 +226,7 @@ public class Server{
                             "</head>\n" +
                             "<body>\n" +
                             "<h3> شما قادر به اضافه کردن این غذا به سبد خود نیستید !</h3>" +
+                            "<a style=\"margin-right:10px\" href=\"http://localhost:8080/getRestaurants\">نمایش رستورانها</a>"+
                             "</body>\n" +
                             "</html>";
                     context.html(finalHtml);
@@ -216,6 +250,7 @@ public class Server{
                         "    </style>\n" +
                         "</head>\n" +
                         "<body>\n" +
+                        "<a style=\"margin-right:10px\" href=\"http://localhost:8080/\">صفحه اصلی</a>"+
                         "    <ul>\n" +
                         "        <li>id: " + user.getId()+ "</li>\n" +
                         "        <li>full name:" + user.getFullName() + "</li>\n" +
