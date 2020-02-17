@@ -221,7 +221,23 @@ public class Server{
             public void handle(@NotNull Context context) throws Exception {
                 User user = loghme.getUser();
                 String userNewCredit = context.formParam("credit");
-                if (userNewCredit == null) {
+                if (userNewCredit.isEmpty()) {
+                    String finalHtml = "<!DOCTYPE html>\n" +
+                            "<html lang=\"en\">\n" +
+                            "<head>\n" +
+                            "    <meta charset=\"UTF-8\">\n" +
+                            "    <title>User</title>\n" +
+                            "    <style>\n" +
+                            "        body {\n" +
+                            "        \tdirection: rtl\n" +
+                            "        }\n" +
+                            "    </style>\n" +
+                            "</head>\n" +
+                            "<body>\n" +
+                            "<h3> مقداری وارد نکردید ! </h3>" +
+                            "</body>\n" +
+                            "</html>";
+                    context.html(finalHtml);
                     return;//this not work fix it
                 }
                 user.setCredit(user.getCredit() + Integer.parseInt(userNewCredit));
