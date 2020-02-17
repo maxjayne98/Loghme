@@ -38,7 +38,7 @@ public class Loghme {
                     getCart();
                     break;
                 case "finalizeOrder":
-                    finalizeOrder();
+                    user.finalizeOrder();
                     break;
                 case "getRecommendedRestaurants":
                     getRecommendedRestaurants();

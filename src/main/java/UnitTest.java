@@ -1,9 +1,5 @@
 import org.junit.*;
 
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.*;
 
 public class UnitTest {
     Loghme loghme = new Loghme();
@@ -52,11 +48,6 @@ public class UnitTest {
         loghme.addToCard(FoodToOrder2);
         loghme.addToCard(FoodToOrder3);
 
-//        List<Food> menu = loghme.getCart();
-//        assertFalse(menu.isEmpty());
-        String printedOrder = loghme.finalizeOrder();
-//        assertTrue(menu.isEmpty());
-//        String ExpectedOutput = "{\"Foodnames\":[\"falafel\",\"kotlet\",\"bademjoon\"],\"count\":3}";
-//        assertSame(ExpectedOutput, printedOrder);
+        loghme.getUser().finalizeOrder();
     }
 }

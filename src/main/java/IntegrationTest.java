@@ -106,7 +106,6 @@ public class IntegrationTest {
         HttpResponse response3 = Unirest.post("http://localhost:8080/finalizeOrder").asString();
         assertEquals(200,response3.getStatus());
         assertEquals(ExpectedHtmlResponse, response3.getBody());
-        System.out.println(response3.getBody());
     }
     private void addSomeFoodToCart(@NotNull Loghme loghme, String RestaurantName){
         HashMap<String, Restaurant> restaurants = loghme.getRestaurants();
