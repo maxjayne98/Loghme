@@ -49,16 +49,16 @@ public class User {
         return location;
     }
 
-    public void addToCart(String jsonString, Restaurant selectedRestaurant, Food selectedFood){
+    public boolean addToCart(Restaurant selectedRestaurant, Food selectedFood){
         if (cart.getRestaurantName() == null){
             cart.setRestaurantName(selectedRestaurant.getName());
         }
-
         if (selectedRestaurant.getName().equals(cart.getRestaurantName())){
             cart.addFood(selectedFood);
+            return true;
         }
         else{
-            System.out.println("your selected food can't be added to your cart ...");
+            return false;
         }
     }
 
