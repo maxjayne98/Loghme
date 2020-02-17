@@ -3,13 +3,8 @@ import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import org.jetbrains.annotations.NotNull;
 import org.junit.*;
-
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class IntegrationTest {
     private  static Loghme loghme = new Loghme();
