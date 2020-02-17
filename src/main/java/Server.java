@@ -252,12 +252,43 @@ public class Server{
                         "    <div>" + CartRestaurantName + "</div>\n" +
                         "    <ul>\n" + rows +
                         "    </ul>\n" +
-                        "    <form action=\"\" method=\"POST\">\n" +
+                        "    <form action=\"/finalizeOrder\" method=\"POST\">\n" +
                         "        <button type=\"submit\">finalize</button>\n" +
                         "    </form>\n" +
                         "</body>\n" +
                         "</html>";
                 context.html(finalHtml);
+            }
+        });
+        app.post("finalizeOrder", new Handler() {
+            @Override
+            public void handle(@NotNull Context context) throws Exception {
+                User user = loghme.getUser();
+                Cart cart = user.getCart();
+                if(cart.isEmpty() ||  cart.getTotal() > user.getCredit()){
+                    context.status(400);
+                }
+                else{
+                    String finalHtml = "<!DOCTYPE html>\n" +
+                            "<html lang=\"en\">\n" +
+                            "<head>\n" +
+                            "    <meta charset=\"UTF-8\">\n" +
+                            "    <title>User</title>\n" +
+                            "    <style>\n" +
+                            "        body {\n" +
+                            "        \tdirection: rtl\n" +
+                            "        }\n" +
+                            "    </style>\n" +
+                            "</head>\n" +
+                            "<body>\n" +
+                            "<h3> سفارش شما ثبت شد </h3>" +
+                            "</body>\n" +
+                            "</html>";
+                    context.html(finalHtml);
+                    user.setCredit(user.getCredit() - cart.getTotal());
+                    user.finalizeOrder();
+                }
+
             }
         });
     }
