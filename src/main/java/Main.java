@@ -11,8 +11,6 @@ public class Main {
         for (Restaurant restaurant : Restaurants) {
             loghme.addRestaurant(restaurant);
         }
-        Server server = new Server();
-        Server.createServer(loghme);
     }
 
 }
